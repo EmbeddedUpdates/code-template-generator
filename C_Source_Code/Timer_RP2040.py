@@ -13,6 +13,7 @@ myFunc.parameters.append(myFuncParam0)
 
 
 fileData = fileMetaData()
+fileData.moduleName = "Timer_RP2040"
 fileData.author = "Patrick"
 fileData.brief = "I changed the file brief"
 fileData.functions.append(myFunc)

@@ -1,17 +1,17 @@
 /**
- * @file 
- * @author Madrick3
- * @date 
- * @brief 
  * 
- * COMPONENT: 
- * VERSION: 
- */
+* @file "Timer_RP2040.c"
+* @author Patrick
+* @brief I changed the file brief
+* 
+* @COMPONENT: TIMER_RP2040
+* @VERSION: DRAFT 
+*/
 /************************************************************
   Version History
   -----------------------------------------------------------
   Revision |  Author   |  Change ID  |  Description
-  00.00.00 |  Madrick3 \  Alpha      |  Initial Creation
+  00.00.00 |  AUTHOR   |  DRAFT      |  Initial Creation
 ************************************************************/
 
 /************************************************************
@@ -21,6 +21,8 @@
 /************************************************************
   INCLUDES
 ************************************************************/
+#include "Timer_RP2040.h"
+
 
 /************************************************************
   ENUMS AND TYPEDEFS

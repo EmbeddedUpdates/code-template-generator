@@ -2,6 +2,7 @@
 import datetime
 
 class fileMetaData:
+    moduleName = "moduleName"
     author = "Madrick3"
     date = datetime.date.today()
     brief = "This is a brief description about the module"
