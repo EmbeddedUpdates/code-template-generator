@@ -21,7 +21,7 @@
 /************************************************************
   INCLUDES
 ************************************************************/
-#include "<bound method fileMetaData.getModuleName of <common_types.fileMetaData object at 0x1047e2f30>>.h"
+#include "<bound method fileMetaData.getModuleName of <common_types.fileMetaData object at 0x101049cd0>>.h"
 
 
 /************************************************************
@@ -42,7 +42,7 @@
  * @invariant n/a
  *
  */
-static void privFunc ()
+static void privFunc ( void )
 {
   /* Empty Function Stub */
 }
@@ -66,7 +66,22 @@ static void privFunc ()
  * @invariant n/a
  *
  */
-int pubFunc (uint32 count )
+int pubFunc0 ( uint32 count )
+{
+  /* Empty Function Stub */
+}
+/**
+ * I have changed the brief for the public function
+ *
+ * @param count0: This param is the first param in the second function
+ * @param count1: This is count1 for the second function
+ *
+ * @pre n/a
+ * @post n/a
+ * @invariant n/a
+ *
+ */
+int pubFunc1 ( uint32 count0, uint32 count1 )
 {
   /* Empty Function Stub */
 }

@@ -168,8 +168,16 @@ class function:
 
     def toFuncPrototype(self):
         prototype = "%s %s (" % (self.returnType, self.name)
-        for p in self.parameters:
-            prototype += p.ptype + " " + p.name + " "
+        if len(self.parameters) == 0:
+            prototype += " void "
+        else:
+            params = self.parameters
+            endIdx = len(params) - 1
+            currIdx = 0
+            while( currIdx < endIdx ):
+                prototype += " " + params[currIdx].getType() + " " + params[currIdx].getName() + ","
+                currIdx+=1
+            prototype += " " + params[currIdx].getType() + " " + params[currIdx].getName() + " "
         prototype += ")"
         return prototype
     
@@ -203,12 +211,12 @@ class function:
 
 class parameter:
     def __init__(self):
-        self.ptype = "TYPE"
+        self.pType = "TYPE"
         self.name = "PARAMNAME"
         self.brief = "THIS IS A BRIEF DESCRIPTION ABOUT THE PARAMETER"
 
     def setType(self, ptype):
-        self.ptype = ptype
+        self.pType = ptype
     
     def getType(self):
         return self.pType
