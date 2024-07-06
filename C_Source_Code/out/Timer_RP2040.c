@@ -41,12 +41,11 @@
  *
  * @param param0: This is a small description about the parameter itself
  *
- *@pre n/a
- *@post n/a
- *@invariant n/a
+ * @pre n/a
+ * @post n/a
+ * @invariant n/a
  *
  */
-
 int Function_Name (int param0 )
 {
   /* Empty Function Stub */
