@@ -21,6 +21,8 @@
 /************************************************************
   INCLUDES
 ************************************************************/
+#include "Platform_Types.h"
+#include "Timer_RP2040_SFR.h"
 
 /************************************************************
   ENUMS AND TYPEDEFS
@@ -46,4 +48,4 @@
  * @invariant n/a
  *
  */
-int Function_Name (int param0 );
+extern int Function_Name (int param0 );

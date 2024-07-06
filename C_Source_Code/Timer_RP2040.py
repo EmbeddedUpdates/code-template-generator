@@ -2,7 +2,7 @@
 # import cog
 from common_types import fileMetaData, function, parameter
 
-print("start")
+# print("start")
 myFunc = function()
 myFunc.brief = "I have changed the description"
 myFuncParam0 = parameter()
@@ -14,11 +14,11 @@ myFunc.parameters.append(myFuncParam0)
 
 fileData = fileMetaData()
 fileData.moduleName = "Timer_RP2040"
-fileData.author = "Patrick"
+fileData.author = "Madrick3"
 fileData.brief = "I changed the file brief"
 fileData.functions.append(myFunc)
 
-
-
+fileData.includeList.append("Platform_Types.h")
+fileData.includeList.append("Timer_RP2040_SFR.h")
 
 

@@ -8,6 +8,7 @@ class fileMetaData:
     date = datetime.date.today()
     brief = "This is a brief description about the module"
     functions = []
+    includeList = []
 
 class function:
     longDescription = "This is a long description about the function, including  its general purpose and design intentions. This comment should be long and include a thorough description of the use case for the function, and also its potential change history. "
@@ -55,7 +56,7 @@ class function:
                     break
             workspace = workspace[:i] + "\n *" + self.formatStringFor120CharacterLimit(subWorkspace)
         newString = workspace
-        print("newstring: %s " % newString)
+        # print("newstring: %s " % newString)
         return newString
 
 

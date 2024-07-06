@@ -25,6 +25,13 @@ cog.outl(" */")
 /************************************************************
   INCLUDES
 ************************************************************/
+[[[cog
+mod = __import__(MODULE)
+
+for inc in mod.fileData.includeList:
+  cog.outl("#include \"%s\"" % inc)
+]]]
+[[[end]]]
 
 /************************************************************
   ENUMS AND TYPEDEFS
@@ -43,6 +50,6 @@ mod = __import__(MODULE)
 
 for f in mod.fileMetaData.functions:
   cog.outl("%s" % f.toBigFuncComment())
-  cog.outl("%s;" % f.toFuncPrototype())
+  cog.outl("extern %s;" % f.toFuncPrototype())
 ]]]
 [[[end]]]
