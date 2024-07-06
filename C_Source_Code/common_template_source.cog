@@ -44,7 +44,7 @@ mod = __import__(MODULE)
 
 for f in mod.fileData.getPrivateFunctions():
   cog.outl("%s" % f.toBigFuncComment())
-  cog.outl("%s" % f.toFuncPrototype())
+  cog.outl("static %s" % f.toFuncPrototype())
   cog.outl("{\n  /* Empty Function Stub */\n}")
 ]]]
 [[[end]]]

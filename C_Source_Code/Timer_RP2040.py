@@ -17,7 +17,7 @@ privFunc = function()
 privFunc.setFuncName("privFunc")
 privFunc.setReturnType("void")
 privFunc.setBrief("This is a private function that is static")
-privFunc.setDescription("This is an example of a long description in  a private function that we want to  make sure to keep informative. There is no need to add a newLine character for this, and we will take care of it in the generator tool")
+privFunc.setDescription("This is an example of a long description in  a private function that we want to  make sure to keep informative. There is no need to add a newLine character for this, and we will take care of it in the generator tool. Later, we can just have this as a part of a CSV or .txt file or something")
 # no parameter is given to the private func, so that later we can create a privFunc that has void params
 
 fileData = fileMetaData()

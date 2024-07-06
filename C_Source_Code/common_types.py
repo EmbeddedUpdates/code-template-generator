@@ -156,7 +156,7 @@ class function:
             workspace = string
         else:
             workspace = string
-            for i in range( 119, -1, -1):
+            for i in range( 116, -1, -1):
                 if workspace[i] == " ":
                     subWorkspace = workspace[i:]
                     break

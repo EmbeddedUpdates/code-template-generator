@@ -21,7 +21,7 @@
 /************************************************************
   INCLUDES
 ************************************************************/
-#include "<bound method fileMetaData.getModuleName of <common_types.fileMetaData object at 0x100ec3020>>.h"
+#include "<bound method fileMetaData.getModuleName of <common_types.fileMetaData object at 0x1047e2f30>>.h"
 
 
 /************************************************************
@@ -32,8 +32,9 @@
   LOCAL FUNCTIONS
 ************************************************************/
 /**
- * This is an example of a long description in  a private function that we want to  make sure to keep informative. There
- * is no need to add a newLine character for this, and we will take care of it in the generator tool
+ * This is an example of a long description in  a private function that we want to  make sure to keep informative.
+ * There is no need to add a newLine character for this, and we will take care of it in the generator tool. Later, we
+ * can just have this as a part of a CSV or .txt file or something
  *
  *
  * @pre n/a
@@ -41,7 +42,7 @@
  * @invariant n/a
  *
  */
-void privFunc ()
+static void privFunc ()
 {
   /* Empty Function Stub */
 }
