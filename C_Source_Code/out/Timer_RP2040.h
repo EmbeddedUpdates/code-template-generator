@@ -41,12 +41,11 @@
  * should be long and include a thorough description of the use case for the function, and also its potential change
  * history. 
  *
- * @param pubparam0: This is a small description about the parameter itself
- * @param : void
+ * @param count: This public func is important and has been set as so
  *
  * @pre n/a
  * @post n/a
  * @invariant n/a
  *
  */
-extern int pubFunc (int pubparam0 void  );
+extern int pubFunc (uint32 count );

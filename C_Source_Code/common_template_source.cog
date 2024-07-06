@@ -2,11 +2,11 @@
  * 
 [[[cog
 mod = __import__(MODULE)
-cog.outl(" * @file \"%s.c\"" % mod.fileData.moduleName)
-cog.outl(" * @author %s" % mod.fileData.author)
-cog.outl(" * @brief %s" % mod.fileData.brief)
+cog.outl(" * @file \"%s.c\"" % mod.fileData.getModuleName())
+cog.outl(" * @author %s" % mod.fileData.getAuthor())
+cog.outl(" * @brief %s" % mod.fileData.getBrief())
 cog.outl(" * ")
-cog.outl(" * @COMPONENT: %s" % mod.fileData.moduleName.upper())
+cog.outl(" * @COMPONENT: %s" % mod.fileData.getModuleName().upper())
 cog.outl(" * @VERSION: DRAFT ")
 cog.outl(" */")
 ]]]
@@ -27,7 +27,7 @@ cog.outl(" */")
 ************************************************************/
 [[[cog
 mod = __import__(MODULE)
-cog.outl("#include \"%s.h\"" % mod.fileData.moduleName)
+cog.outl("#include \"%s.h\"" % mod.fileData.getModuleName)
 ]]]
 [[[end]]]
 
@@ -42,7 +42,7 @@ cog.outl("#include \"%s.h\"" % mod.fileData.moduleName)
 [[[cog
 mod = __import__(MODULE)
 
-for f in mod.fileMetaData.privateFunctions:
+for f in mod.fileData.getPrivateFunctions():
   cog.outl("%s" % f.toBigFuncComment())
   cog.outl("%s" % f.toFuncPrototype())
   cog.outl("{\n  /* Empty Function Stub */\n}")
@@ -61,7 +61,7 @@ for f in mod.fileMetaData.privateFunctions:
 [[[cog
 mod = __import__(MODULE)
 
-for f in mod.fileMetaData.publicFunctions:
+for f in mod.fileData.publicFunctions:
   cog.outl("%s" % f.toFuncComment())
   cog.outl("%s" % f.toFuncPrototype())
   cog.outl("{\n  /* Empty Function Stub */\n}")

@@ -21,7 +21,7 @@
 /************************************************************
   INCLUDES
 ************************************************************/
-#include "Timer_RP2040.h"
+#include "<bound method fileMetaData.getModuleName of <common_types.fileMetaData object at 0x100ec3020>>.h"
 
 
 /************************************************************
@@ -32,18 +32,16 @@
   LOCAL FUNCTIONS
 ************************************************************/
 /**
- * This is an example for a long description in the private or local functions. You don't need to add \n characters or
- * anything like that and it will generate in the source code with them automatically added.
+ * This is an example of a long description in  a private function that we want to  make sure to keep informative. There
+ * is no need to add a newLine character for this, and we will take care of it in the generator tool
  *
- * @param pubparam0: This is a small description about the parameter itself
- * @param : void
  *
  * @pre n/a
  * @post n/a
  * @invariant n/a
  *
  */
-int privFunc (int pubparam0 void  )
+void privFunc ()
 {
   /* Empty Function Stub */
 }
@@ -58,17 +56,16 @@ int privFunc (int pubparam0 void  )
 ************************************************************/
 
 /**
- * I have changed the description
+ * I have changed the brief for the public function
  *
- * @param pubparam0: This is a small description about the parameter itself
- * @param : void
+ * @param count: This public func is important and has been set as so
  *
  * @pre n/a
  * @post n/a
  * @invariant n/a
  *
  */
-int pubFunc (int pubparam0 void  )
+int pubFunc (uint32 count )
 {
   /* Empty Function Stub */
 }

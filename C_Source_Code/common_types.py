@@ -1,26 +1,131 @@
 
 import datetime
-import math
+# import math
 
 class fileMetaData:
-    moduleName = "moduleName"
-    author = "Madrick3"
-    date = datetime.date.today()
-    brief = "This is a brief description about the module"
-    privateFunctions = []
-    publicFunctions = []
-    includeList = []
+    def __init__(self, name="MODULE", author="AUTHOR"):
+        self.moduleName = name
+        self.author = author
+        self.date = datetime.date.today()
+        self.brief = "This is a brief description about the module"
+        self.privateFunctions = []
+        self.publicFunctions = []
+        self.includeList = []
+    
+    def getModuleName(self):
+        return self.moduleName
+    
+    def setModuleName(self, string):
+        self.moduleName = string
+    
+    def getAuthor(self):
+        return self.author
+    
+    def setAuthor(self, string):
+        self.author = string
+    
+    def getCreationDate(self):
+        return self.date
+    
+    def setCreationDate(self, date):
+        self.date = date
 
+    def setCreationDateToToday(self):
+        self.date = datetime.date.today()
+
+    def getBrief(self):
+        return self.brief
+    
+    def setBrief(self, brief):
+        self.brief = brief
+    
+    def getPrivateFunctions(self):
+        return self.privateFunctions
+    
+    def clrPrivateFunctions(self):
+        self.privateFunctions = []
+
+    def setPrivateFunctions(self, privateFunctions):
+        self.privateFunctions = privateFunctions
+    
+    def addPrivateFunctions(self, func):
+        self.privateFunctions.append(func)
+    
+    def getPublicFunctions(self):
+        return self.publicFunctions
+
+    def clrPublicFunctions(self):
+        self.publicFunctions = []
+
+    def setPublicFunctions(self, publicFunctions):
+        self.publicFunctions = publicFunctions
+    
+    def addPublicFunctions(self, func):
+        self.publicFunctions.append(func)
+    
+    def getIncludeList(self):
+        return self.includeList
 class function:
-    longDescription = "This is a long description about the function, including  its general purpose and design intentions. This comment should be long and include a thorough description of the use case for the function, and also its potential change history. "
-    brief = "This is a brief description about a function"
-    parameters = []
-    preCondition = "n/a"
-    postCondition = "n/a"
-    invariantCondition = "n/a"
-    returnType = "int"
-    name = "Function_Name"
+    def __init__(self):
+        self.longDescription = "This is a long description about the function, including  its general purpose and design intentions. This comment should be long and include a thorough description of the use case for the function, and also its potential change history. "
+        self.brief = "This is a brief description about a function"
+        self.parameters = []
+        self.preCondition = "n/a"
+        self.postCondition = "n/a"
+        self.invariantCondition = "n/a"
+        self.returnType = "int"
+        self.name = "Function_Name"
 
+    def getDescription(self):
+        return self.longDescription
+    
+    def setDescription(self, desc):
+        self.longDescription = desc
+
+    def getBrief(self):
+        return self.brief
+    
+    def setBrief(self, brief):
+        self.brief = brief
+
+    def getParameters(self):
+        return self.parameters
+    
+    def setParameters(self, params):
+        self.parameters = params
+
+    def addParameter(self, param):
+        self.parameters.append(param)
+    
+    def getPreCondition(self):
+        return self.preCondition
+    
+    def setPreCondition(self, pre):
+        self.preCondition = pre
+    
+    def getPostCondition(self):
+        return self.postCondition
+    
+    def setPostCondition(self, post):
+        self.postCondition = post
+
+    def getInvConditions(self):
+        return self.invariantCondition
+    
+    def setInvCondition(self, inv):
+        self.invariantCondition = inv
+    
+    def getReturnType(self):
+        return self.returnType
+    
+    def setReturnType(self, ret):
+        self.returnType = ret
+    
+    def getFuncName(self):
+        return self.name
+    
+    def setFuncName(self, name):
+        self.name = name
 
     '''
     formatStringFor120CharacterLimit()
@@ -97,9 +202,28 @@ class function:
         return comment
 
 class parameter:
-    ptype = "int"
-    name = "param1"
-    brief = "This is a brief description about the parameter"
+    def __init__(self):
+        self.ptype = "TYPE"
+        self.name = "PARAMNAME"
+        self.brief = "THIS IS A BRIEF DESCRIPTION ABOUT THE PARAMETER"
+
+    def setType(self, ptype):
+        self.ptype = ptype
+    
+    def getType(self):
+        return self.pType
+    
+    def getName(self):
+        return self.name
+    
+    def setName(self, name):
+        self.name = name
+
+    def getBrief(self):
+        return self.brief
+    
+    def setBrief(self, brief):
+        self.brief = brief
 
     #forms and returns the string "@param 
     def toParamComment(self):
