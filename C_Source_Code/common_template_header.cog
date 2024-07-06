@@ -48,7 +48,7 @@ for inc in mod.fileData.includeList:
 [[[cog
 mod = __import__(MODULE)
 
-for f in mod.fileMetaData.functions:
+for f in mod.fileMetaData.publicFunctions:
   cog.outl("%s" % f.toBigFuncComment())
   cog.outl("extern %s;" % f.toFuncPrototype())
 ]]]

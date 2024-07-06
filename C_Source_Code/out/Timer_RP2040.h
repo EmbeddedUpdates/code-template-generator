@@ -1,7 +1,7 @@
 /**
  * 
 * @file "Timer_RP2040.h"
-* @author Patrick
+* @author Madrick3
 * @brief I changed the file brief
 * 
 * @COMPONENT: TIMER_RP2040
@@ -41,11 +41,12 @@
  * should be long and include a thorough description of the use case for the function, and also its potential change
  * history. 
  *
- * @param param0: This is a small description about the parameter itself
+ * @param pubparam0: This is a small description about the parameter itself
+ * @param : void
  *
  * @pre n/a
  * @post n/a
  * @invariant n/a
  *
  */
-extern int Function_Name (int param0 );
+extern int pubFunc (int pubparam0 void  );

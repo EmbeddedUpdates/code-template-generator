@@ -7,7 +7,8 @@ class fileMetaData:
     author = "Madrick3"
     date = datetime.date.today()
     brief = "This is a brief description about the module"
-    functions = []
+    privateFunctions = []
+    publicFunctions = []
     includeList = []
 
 class function:

@@ -37,6 +37,20 @@ cog.outl("#include \"%s.h\"" % mod.fileData.moduleName)
 ************************************************************/
 
 /************************************************************
+  LOCAL FUNCTIONS
+************************************************************/
+[[[cog
+mod = __import__(MODULE)
+
+for f in mod.fileMetaData.privateFunctions:
+  cog.outl("%s" % f.toBigFuncComment())
+  cog.outl("%s" % f.toFuncPrototype())
+  cog.outl("{\n  /* Empty Function Stub */\n}")
+]]]
+[[[end]]]
+
+
+/************************************************************
   EXTERN FUNCTIONS
 ************************************************************/
 
@@ -47,7 +61,7 @@ cog.outl("#include \"%s.h\"" % mod.fileData.moduleName)
 [[[cog
 mod = __import__(MODULE)
 
-for f in mod.fileMetaData.functions:
+for f in mod.fileMetaData.publicFunctions:
   cog.outl("%s" % f.toFuncComment())
   cog.outl("%s" % f.toFuncPrototype())
   cog.outl("{\n  /* Empty Function Stub */\n}")

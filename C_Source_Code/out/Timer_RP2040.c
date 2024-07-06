@@ -1,7 +1,7 @@
 /**
  * 
 * @file "Timer_RP2040.c"
-* @author Patrick
+* @author Madrick3
 * @brief I changed the file brief
 * 
 * @COMPONENT: TIMER_RP2040
@@ -29,6 +29,27 @@
 ************************************************************/
 
 /************************************************************
+  LOCAL FUNCTIONS
+************************************************************/
+/**
+ * This is an example for a long description in the private or local functions. You don't need to add \n characters or
+ * anything like that and it will generate in the source code with them automatically added.
+ *
+ * @param pubparam0: This is a small description about the parameter itself
+ * @param : void
+ *
+ * @pre n/a
+ * @post n/a
+ * @invariant n/a
+ *
+ */
+int privFunc (int pubparam0 void  )
+{
+  /* Empty Function Stub */
+}
+
+
+/************************************************************
   EXTERN FUNCTIONS
 ************************************************************/
 
@@ -39,14 +60,15 @@
 /**
  * I have changed the description
  *
- * @param param0: This is a small description about the parameter itself
+ * @param pubparam0: This is a small description about the parameter itself
+ * @param : void
  *
  * @pre n/a
  * @post n/a
  * @invariant n/a
  *
  */
-int Function_Name (int param0 )
+int pubFunc (int pubparam0 void  )
 {
   /* Empty Function Stub */
 }
