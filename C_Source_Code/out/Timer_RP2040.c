@@ -2,10 +2,14 @@
  * 
 * @file "Timer_RP2040.c"
 * @author Madrick3
-* @brief Initializes, manages, and clears timers. Also manages the alarms which may trigger interrupts.
+* @brief Provides a global timebase for software through the generation of a global microsecond timebase. The timebase relies
+* on a  one microsend reference that is generated in the watchdog, and is derived from the reference clock (REFCLK).
+* A 64-bit timer is managed, and is not able to overflow on it's own - thoughtful use of the module provides
+* completely monotic use in practice. Otherwise, the module initializes, manages, and clears the timer, also manages
+* the alarms which may trigger interrupts.
 * 
 * @COMPONENT: TIMER_RP2040
-* @VERSION: DRAFT 
+* @VERSION: 00.01.00 
 */
 /************************************************************
   Version History
@@ -195,7 +199,7 @@ Std_ErrorCode Timer_RP2040_Deinit ( void )
 
 
 /**
- * Deinitializes the timer software module. Disables all alarms, Pauses the timer register, but does not reset the timer.
+ * 
  *
  * @return 
  *         0: 'E_OK' if successful 

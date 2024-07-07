@@ -4,10 +4,10 @@
 mod = __import__(MODULE)
 cog.outl(" * @file \"%s.c\"" % mod.fileData.getModuleName())
 cog.outl(" * @author %s" % mod.fileData.getAuthor())
-cog.outl(" * @brief %s" % mod.fileData.getBrief())
+cog.outl(" * @brief %s" % mod.fileData.getFileBrief())
 cog.outl(" * ")
 cog.outl(" * @COMPONENT: %s" % mod.fileData.getModuleName().upper())
-cog.outl(" * @VERSION: DRAFT ")
+cog.outl(" * @VERSION: %s " % (mod.fileData.getVersion()))
 cog.outl(" */")
 ]]]
 [[[end]]]

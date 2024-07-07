@@ -5,9 +5,9 @@ from common_types import fileMetaData, function, parameter
 """
 VERSION CHECK
 """
-TIMER_RP2040_TEMPLATE_MAJOR_VERSION = 0x00
-TIMER_RP2040_TEMPLATE_MINOR_VERSION = 0x01
-TIMER_RP2040_TEMPLATE_BUGFIX_VERSION = 0x00
+TIMER_RP2040_TEMPLATE_MAJOR_VERSION = "00"
+TIMER_RP2040_TEMPLATE_MINOR_VERSION = "01"
+TIMER_RP2040_TEMPLATE_BUGFIX_VERSION = "00"
 if fileMetaData.majorVersion != TIMER_RP2040_TEMPLATE_MAJOR_VERSION:
     raise ValueError(" common_types.fileMetaData.majorVersion %s is incompatible with TIMER_RP2040 major version %s" % (fileMetaData.majorVersion, TIMER_RP2040_TEMPLATE_MAJOR_VERSION))
 if fileMetaData.minorVersion != TIMER_RP2040_TEMPLATE_MINOR_VERSION:
@@ -44,7 +44,7 @@ FILE DATA
 fileData = fileMetaData()
 fileData.setModuleName("Timer_RP2040")
 fileData.setAuthor("Madrick3")
-fileData.setBrief("Initializes, manages, and clears timers. Also manages the alarms which may trigger interrupts.")
+fileData.setBrief("Provides a global timebase for software through the generation of a global microsecond timebase. The timebase relies on a  one microsend reference that is generated in the watchdog, and is derived from the reference clock (REFCLK). A 64-bit timer is managed, and is not able to overflow on it's own - thoughtful use of the module provides completely monotic use in practice. Otherwise, the module initializes, manages, and clears the timer, also manages the alarms which may trigger interrupts.")
 fileData.includeList.append("Platform_Types.h")
 fileData.includeList.append("Timer_RP2040_SFR.h")
 
@@ -148,12 +148,33 @@ TIMER_DEINIT.setPostCondition("Alarms are all disabeled, Timer is paused.")
 fileData.addPublicFunctions(TIMER_DEINIT)
 
 #Timer Interrupt Enable
-# TIMER_DEINIT = function()
-# TIMER_DEINIT.setFuncName(FUNC_PREFIX + "InterruptEnable")
-# TIMER_DEINIT.setDescription("")
-# TIMER_DEINIT.setBrief("Deinitializes the timer software module. Disables all alarms, Pauses the timer register, but does not reset the timer.")
-# TIMER_DEINIT.setReturnType("Std_ErrorCode")
-# TIMER_DEINIT.setReturnDesc(STANDARD_RETURN_DESCR_VOID)
-# TIMER_DEINIT.setPreCondition("Timer module was previously enabled.")
-# TIMER_DEINIT.setPostCondition("Alarms are all disabeled, Timer is paused.")
-# fileData.addPublicFunctions(TIMER_DEINIT)
+TIMER_INTENABLE = function()
+TIMER_INTENABLE.setFuncName(FUNC_PREFIX + "InterruptEnable")
+TIMER_INTENABLE.setDescription("")
+TIMER_INTENABLE.setBrief("")
+TIMER_INTENABLE.setReturnType("Std_ErrorCode")
+TIMER_INTENABLE.setReturnDesc(STANDARD_RETURN_DESCR_VOID)
+TIMER_INTENABLE.setPreCondition("Timer module was previously enabled.")
+TIMER_INTENABLE.setPostCondition("Alarms are all disabeled, Timer is paused.")
+fileData.addPublicFunctions(TIMER_INTENABLE)
+
+
+# Std_ReturnType Timer_RP2040_InterruptEnable ( void );
+
+# Std_ReturnType Timer_RP2040_InterruptDisable ( void );
+
+# Std_ReturnType Timer_RP2040_ReadTimer ( uint32 * TimerHigh, uint32 * TimerLow );
+
+# Std_ReturnType Timer_RP2040_SetTimer ( uint32 * TimerHigh, uint32 * TimerLow );
+
+# Std_ReturnType Timer_RP2040_ReadTimerLow ( uint32 * TimerLow );
+
+# Std_ReturnType Timer_RP2040_ReadTimerHigh ( uint32 * TimerHigh );
+
+# Std_ReturnType Timer_RP2040_SetTimerLow ( uint32 * TimerLow );
+
+# Std_ReturnType Timer_RP2040_SetTimerHigh ( uint32 * TimerHigh );
+
+# Std_ReturnType Timer_RP2040_CheckAlarm ( uint8 n );
+
+# Std_ReturnType Timer_RP2040_DisarmAlarm ( uint8 n );
