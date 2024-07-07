@@ -51,5 +51,6 @@ mod = __import__(MODULE)
 for f in mod.fileData.getPublicFunctions():
   cog.outl("%s" % f.toBigFuncComment())
   cog.outl("extern %s;" % f.toFuncPrototype())
+  cog.outl("")
 ]]]
 [[[end]]]

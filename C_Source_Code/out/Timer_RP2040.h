@@ -2,7 +2,7 @@
  * 
 * @file "Timer_RP2040.h"
 * @author Madrick3
-* @brief I changed the file brief
+* @brief Initializes, manages, and clears timers. Also manages the alarms which may trigger interrupts.
 * 
 * @COMPONENT: TIMER_RP2040
 * @VERSION: DRAFT 
@@ -37,29 +37,50 @@
 ************************************************************/
 
 /**
- * This is a long description about the function, including  its general purpose and design intentions. This comment
- * should be long and include a thorough description of the use case for the function, and also its potential change
- * history. 
+ * Initializes the timer module for a basic runtime implemetations: Arms ALARM0 as a 1ms timer, clears TIME, and begins
+ * the timer. Can fail if the RP2040_Watchdog is not already initialized. (See RP2040 datasheet section 4.7.2 'Tick
+ * Generation'). Interrupts are not necessarily enabled at this stage.
  *
- * @param count: This public func is important and has been set as so
+ * @return 
+ *         0: 'E_OK' if successful 
+ *         1: 'E_NOT_OK' if the operation is not successful
  *
- * @pre n/a
- * @post n/a
+ * @pre  Tick generation is already started in the watchdog module. 
+ * @post  ALARM0 is armed. 
  * @invariant n/a
  *
  */
-extern int pubFunc0 ( uint32 count );
+extern Std_ErrorCode Timer_RP2040_Init ( void );
+
 /**
- * This is a long description about the function, including  its general purpose and design intentions. This comment
- * should be long and include a thorough description of the use case for the function, and also its potential change
- * history. 
+ * Updates internal tracking variables that the timer is 'uninit'. Disables all alarms. Pauses the timer. Expects that
+ * the timer module was previously enabled, and will report an error if the module was not initialized. Will disable
+ * interrupts as well.
  *
- * @param count0: This param is the first param in the second function
- * @param count1: This is count1 for the second function
+ * @return 
+ *         0: 'E_OK' if successful 
+ *         1: 'E_NOT_OK' if the operation is not successful 
+ *         3: 'E_MODULE_UNINIT' if the timer is not yet initialized
  *
- * @pre n/a
- * @post n/a
+ * @pre Timer module was previously enabled.
+ * @post Alarms are all disabeled, Timer is paused.
  * @invariant n/a
  *
  */
-extern int pubFunc1 ( uint32 count0, uint32 count1 );
+extern Std_ErrorCode Timer_RP2040_Deinit ( void );
+
+/**
+ * 
+ *
+ * @return 
+ *         0: 'E_OK' if successful 
+ *         1: 'E_NOT_OK' if the operation is not successful 
+ *         3: 'E_MODULE_UNINIT' if the timer is not yet initialized
+ *
+ * @pre Timer module was previously enabled.
+ * @post Alarms are all disabeled, Timer is paused.
+ * @invariant n/a
+ *
+ */
+extern Std_ErrorCode Timer_RP2040_InterruptEnable ( void );
+

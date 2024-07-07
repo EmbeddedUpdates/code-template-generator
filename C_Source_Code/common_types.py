@@ -75,6 +75,7 @@ class function:
         self.invariantCondition = "n/a"
         self.returnType = "int"
         self.name = "Function_Name"
+        self.retDesc = "@return void"
 
     def getDescription(self):
         return self.longDescription
@@ -88,6 +89,12 @@ class function:
     def setBrief(self, brief):
         self.brief = brief
 
+    def getReturnDesc(self):
+        return self.retDesc
+    
+    def setReturnDesc(self, desc):
+        self.retDesc = desc
+    
     def getParameters(self):
         return self.parameters
     
@@ -184,9 +191,10 @@ class function:
     def toBigFuncComment(self):
         comment = "/**\n"
         comment += " * %s\n" % self.formatStringFor120CharacterLimit(self.longDescription)
-        comment += " *\n"
         for p in self.parameters:
             comment += " * %s\n" % p.toParamComment()
+        comment += " *\n"
+        comment += "%s\n" % self.retDesc
         comment += " *\n"
         comment += " * @pre %s\n" % self.preCondition
         comment += " * @post %s\n" % self.postCondition
@@ -198,9 +206,10 @@ class function:
     def toFuncComment(self):
         comment = "/**\n"
         comment += " * %s\n" % self.brief
-        comment += " *\n"
         for p in self.parameters:
             comment += " * %s\n" % p.toParamComment()
+        comment += " *\n"
+        comment += "%s\n" % self.retDesc
         comment += " *\n"
         comment += " * @pre %s\n" % self.preCondition
         comment += " * @post %s\n" % self.postCondition

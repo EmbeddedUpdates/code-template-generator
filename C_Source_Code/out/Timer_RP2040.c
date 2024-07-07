@@ -2,7 +2,7 @@
  * 
 * @file "Timer_RP2040.c"
 * @author Madrick3
-* @brief I changed the file brief
+* @brief Initializes, manages, and clears timers. Also manages the alarms which may trigger interrupts.
 * 
 * @COMPONENT: TIMER_RP2040
 * @VERSION: DRAFT 
@@ -21,7 +21,7 @@
 /************************************************************
   INCLUDES
 ************************************************************/
-#include "<bound method fileMetaData.getModuleName of <common_types.fileMetaData object at 0x101049cd0>>.h"
+#include "Timer_RP2040.h"
 
 
 /************************************************************
@@ -31,21 +31,122 @@
 /************************************************************
   LOCAL FUNCTIONS
 ************************************************************/
+
 /**
- * This is an example of a long description in  a private function that we want to  make sure to keep informative.
- * There is no need to add a newLine character for this, and we will take care of it in the generator tool. Later, we
- * can just have this as a part of a CSV or .txt file or something
+ * Writes to the TIMER_PAUSE register, reports E_OK if Timer is paused. Reports E_NOT_OK if the timer did not pause.
  *
+ * @return 
+ *         0: 'E_OK' if successful 
+ *         1: 'E_NOT_OK' if the operation is not successful 
+ *         3: 'E_MODULE_UNINIT' if the timer is not yet initialized
  *
  * @pre n/a
  * @post n/a
  * @invariant n/a
  *
  */
-static void privFunc ( void )
+static Std_ErrorCode Timer_RP2040_Pause ( void )
 {
   /* Empty Function Stub */
 }
+
+/**
+ * Writes to the TIMER_PAUSE register, reports OK if Timer is unpaused. Reports NOT_OK if the timer did not unpause.
+ * There is possible room for improvement here in reporting E_NOT_OK in the case that the timer was not paused already.
+ *
+ * @return 
+ *         0: 'E_OK' if successful 
+ *         1: 'E_NOT_OK' if the operation is not successful 
+ *         3: 'E_MODULE_UNINIT' if the timer is not yet initialized
+ *
+ * @pre n/a
+ * @post n/a
+ * @invariant n/a
+ *
+ */
+static Std_ErrorCode Timer_RP2040_Unpause ( void )
+{
+  /* Empty Function Stub */
+}
+
+/**
+ * Reads from TIMER_TIMELR register. Reports bits {31:0} in the out buffer 'TimerLow'.
+ * @param TimerLow: Output buffer for TIMEL read
+ *
+ * @return 
+ *         0: 'E_OK' if successful 
+ *         1: 'E_NOT_OK' if the operation is not successful 
+ *         2: 'E_PARAM' if the input parameter is not valid 
+ *         3: 'E_MODULE_UNINIT' if the timer is not yet initialized
+ *
+ * @pre n/a
+ * @post n/a
+ * @invariant n/a
+ *
+ */
+static Std_ErrorCode Timer_RP2040_ReadTimerLow (  uint32 *  TimerLow )
+{
+  /* Empty Function Stub */
+}
+
+/**
+ * Reads from TIMER_TIMEHR register. Reports bits {63:32} in the out buffer 'TimerHigh'.
+ * @param TimerHigh: Output buffer for TIMEH read
+ *
+ * @return 
+ *         0: 'E_OK' if successful 
+ *         1: 'E_NOT_OK' if the operation is not successful 
+ *         2: 'E_PARAM' if the input parameter is not valid 
+ *         3: 'E_MODULE_UNINIT' if the timer is not yet initialized
+ *
+ * @pre n/a
+ * @post n/a
+ * @invariant n/a
+ *
+ */
+static Std_ErrorCode Timer_RP2040_ReadTimerHigh (  uint32 *  TimerHigh )
+{
+  /* Empty Function Stub */
+}
+
+/**
+ * Writes to TIMER_TIMELW register. Does not perform input checking
+ * @param TimerLow: Input word for TIMEL write
+ *
+ * @return 
+ *         0: 'E_OK' if successful 
+ *         1: 'E_NOT_OK' if the operation is not successful 
+ *         3: 'E_MODULE_UNINIT' if the timer is not yet initialized
+ *
+ * @pre n/a
+ * @post n/a
+ * @invariant n/a
+ *
+ */
+static Std_ErrorCode Timer_RP2040_WriteTimerLow (  uint32  TimerLow )
+{
+  /* Empty Function Stub */
+}
+
+/**
+ * Writes to TIMER_TIMEHW register. Does not perform input checking.
+ * @param TimerHigh: Input word for TIMEH read
+ *
+ * @return 
+ *         0: 'E_OK' if successful 
+ *         1: 'E_NOT_OK' if the operation is not successful 
+ *         3: 'E_MODULE_UNINIT' if the timer is not yet initialized
+ *
+ * @pre n/a
+ * @post n/a
+ * @invariant n/a
+ *
+ */
+static Std_ErrorCode Timer_RP2040_WriteTimerHigh (  uint32  TimerHigh )
+{
+  /* Empty Function Stub */
+}
+
 
 
 /************************************************************
@@ -57,31 +158,58 @@ static void privFunc ( void )
 ************************************************************/
 
 /**
- * I have changed the brief for the public function
+ * Initializes the RP2040  timer. Prepares ALARM0 for 1ms triggeers. Will fail if the tick generation is not yet initialized.
  *
- * @param count: This public func is important and has been set as so
+ * @return 
+ *         0: 'E_OK' if successful 
+ *         1: 'E_NOT_OK' if the operation is not successful
  *
- * @pre n/a
- * @post n/a
+ * @pre  Tick generation is already started in the watchdog module. 
+ * @post  ALARM0 is armed. 
  * @invariant n/a
  *
  */
-int pubFunc0 ( uint32 count )
+Std_ErrorCode Timer_RP2040_Init ( void )
 {
   /* Empty Function Stub */
 }
+
+
 /**
- * I have changed the brief for the public function
+ * Deinitializes the timer software module. Disables all alarms, Pauses the timer register, but does not reset the timer.
  *
- * @param count0: This param is the first param in the second function
- * @param count1: This is count1 for the second function
+ * @return 
+ *         0: 'E_OK' if successful 
+ *         1: 'E_NOT_OK' if the operation is not successful 
+ *         3: 'E_MODULE_UNINIT' if the timer is not yet initialized
  *
- * @pre n/a
- * @post n/a
+ * @pre Timer module was previously enabled.
+ * @post Alarms are all disabeled, Timer is paused.
  * @invariant n/a
  *
  */
-int pubFunc1 ( uint32 count0, uint32 count1 )
+Std_ErrorCode Timer_RP2040_Deinit ( void )
 {
   /* Empty Function Stub */
 }
+
+
+/**
+ * Deinitializes the timer software module. Disables all alarms, Pauses the timer register, but does not reset the timer.
+ *
+ * @return 
+ *         0: 'E_OK' if successful 
+ *         1: 'E_NOT_OK' if the operation is not successful 
+ *         3: 'E_MODULE_UNINIT' if the timer is not yet initialized
+ *
+ * @pre Timer module was previously enabled.
+ * @post Alarms are all disabeled, Timer is paused.
+ * @invariant n/a
+ *
+ */
+Std_ErrorCode Timer_RP2040_InterruptEnable ( void )
+{
+  /* Empty Function Stub */
+}
+
+

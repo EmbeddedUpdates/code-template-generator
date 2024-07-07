@@ -27,8 +27,8 @@ cog.outl(" */")
 ************************************************************/
 [[[cog
 mod = __import__(MODULE)
-cog.outl("#include \"%s.h\"" % mod.fileData.getModuleName)
-]]]
+cog.outl("#include \"%s.h\"" % mod.fileData.getModuleName())
+]]]3
 [[[end]]]
 
 
@@ -39,6 +39,7 @@ cog.outl("#include \"%s.h\"" % mod.fileData.getModuleName)
 /************************************************************
   LOCAL FUNCTIONS
 ************************************************************/
+
 [[[cog
 mod = __import__(MODULE)
 
@@ -46,6 +47,7 @@ for f in mod.fileData.getPrivateFunctions():
   cog.outl("%s" % f.toBigFuncComment())
   cog.outl("static %s" % f.toFuncPrototype())
   cog.outl("{\n  /* Empty Function Stub */\n}")
+  cog.outl("")
 ]]]
 [[[end]]]
 
@@ -65,5 +67,6 @@ for f in mod.fileData.publicFunctions:
   cog.outl("%s" % f.toFuncComment())
   cog.outl("%s" % f.toFuncPrototype())
   cog.outl("{\n  /* Empty Function Stub */\n}")
+  cog.outl("\n")
 ]]]
 [[[end]]]
