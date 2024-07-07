@@ -2,6 +2,18 @@
 # import cog
 from common_types import fileMetaData, function, parameter
 
+"""
+VERSION CHECK
+"""
+TIMER_RP2040_TEMPLATE_MAJOR_VERSION = 0x00
+TIMER_RP2040_TEMPLATE_MINOR_VERSION = 0x01
+TIMER_RP2040_TEMPLATE_BUGFIX_VERSION = 0x00
+if fileMetaData.majorVersion != TIMER_RP2040_TEMPLATE_MAJOR_VERSION:
+    raise ValueError(" common_types.fileMetaData.majorVersion %s is incompatible with TIMER_RP2040 major version %s" % (fileMetaData.majorVersion, TIMER_RP2040_TEMPLATE_MAJOR_VERSION))
+if fileMetaData.minorVersion != TIMER_RP2040_TEMPLATE_MINOR_VERSION:
+    raise ValueError(" common_types.fileMetaData.majorVersion %s is incompatible with TIMER_RP2040 major version %s" % (fileMetaData.minorVersion, TIMER_RP2040_TEMPLATE_MINOR_VERSION))
+
+
 FUNC_PREFIX = "Timer_RP2040_"
 
 STANDARD_RETURN_DESCR_VOID_INIT = \

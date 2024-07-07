@@ -3,6 +3,10 @@ import datetime
 # import math
 
 class fileMetaData:
+    majorVersion = 0x00
+    minorVersion = 0x01
+    bugfixVersion = 0x00
+    
     def __init__(self, name="MODULE", author="AUTHOR"):
         self.moduleName = name
         self.author = author
