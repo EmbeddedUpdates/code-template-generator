@@ -44,7 +44,7 @@ FILE DATA
 fileData = fileMetaData()
 fileData.setModuleName("Timer_RP2040")
 fileData.setAuthor("Madrick3")
-fileData.setBrief("Provides a global timebase for software through the generation of a global microsecond timebase. The timebase relies on a  one microsend reference that is generated in the watchdog, and is derived from the reference clock (REFCLK). A 64-bit timer is managed, and is not able to overflow on it's own - thoughtful use of the module provides completely monotic use in practice. Otherwise, the module initializes, manages, and clears the timer, also manages the alarms which may trigger interrupts.")
+fileData.setBrief("Provides a global timebase for software through the generation of a global microsecond timebase. The timebase relies on a  one microsend reference that is generated in the watchdog, and is derived from the reference clock (REFCLK). A 64-bit timer is managed, and is not able to overflow on it's own - thoughtful use of the module provides completely monotic use in practice, although setting the time to a specific large value like 0xFFFFFFFF will result in overflow. Otherwise, the module initializes, manages, and clears the timer, also manages the alarms which may trigger interrupts.")
 fileData.includeList.append("Platform_Types.h")
 fileData.includeList.append("Timer_RP2040_SFR.h")
 
@@ -150,18 +150,51 @@ fileData.addPublicFunctions(TIMER_DEINIT)
 #Timer Interrupt Enable
 TIMER_INTENABLE = function()
 TIMER_INTENABLE.setFuncName(FUNC_PREFIX + "InterruptEnable")
-TIMER_INTENABLE.setDescription("")
-TIMER_INTENABLE.setBrief("")
+TIMER_INTENABLE.setDescription("Writes directly to the TIMER_INTE register, given an uint8 bitmask. Will report a parameter failure if the bitmask parameter is not within the acceptable range [1,15]. Will not disable, clear, or otherwise touch alarms.")
+TIMER_INTENABLE.setBrief("Enables interrupts for the ALARMS given by the bitmask parameter.")
 TIMER_INTENABLE.setReturnType("Std_ErrorCode")
-TIMER_INTENABLE.setReturnDesc(STANDARD_RETURN_DESCR_VOID)
+TIMER_INTENABLE.setReturnDesc(STANDARD_RETURN_DESCR)
 TIMER_INTENABLE.setPreCondition("Timer module was previously enabled.")
-TIMER_INTENABLE.setPostCondition("Alarms are all disabeled, Timer is paused.")
+TIMER_INTENABLE.setPostCondition("Interrupts are enabled.")
+TIMER_INTENABLE_BITMASK = parameter()
+TIMER_INTENABLE_BITMASK.setBrief("Bitmask for which interrupts should be enabled. Acceptable values are between (and including) 1d (0b0001) and 15d (0b1111)")
+TIMER_INTENABLE_BITMASK.setName("int_bitmask")
+TIMER_INTENABLE_BITMASK.setType(" uint8 ")
+TIMER_INTENABLE.addParameter(TIMER_INTENABLE_BITMASK)
 fileData.addPublicFunctions(TIMER_INTENABLE)
 
+#Timer Interrupt Disable
+TIMER_INTDISABLE = function()
+TIMER_INTDISABLE.setFuncName(FUNC_PREFIX + "InterruptDisable")
+TIMER_INTDISABLE.setDescription("Writes directly to the TIMER_INTE register, given an uint8 bitmask. Will report a parameter failure if the bitmask parameter is not within the acceptable range [1,15]. Will not disable, clear, or otherwise touch alarms.")
+TIMER_INTDISABLE.setBrief("Disables interrupts for the ALARMS given by the bitmask parameter.")
+TIMER_INTDISABLE.setReturnType("Std_ErrorCode")
+TIMER_INTDISABLE.setReturnDesc(STANDARD_RETURN_DESCR)
+TIMER_INTDISABLE.setPreCondition("Timer module was previously enabled.")
+TIMER_INTDISABLE.setPostCondition("Interrupts are disabled.")
+TIMER_INTDISABLE_BITMASK = parameter()
+TIMER_INTDISABLE_BITMASK.setBrief("Bitmask for which interrupts should be disabled. Acceptable values are between (and including) 1d (0b0001) and 15d (0b1111)")
+TIMER_INTDISABLE_BITMASK.setName("int_bitmask")
+TIMER_INTDISABLE_BITMASK.setType(" uint8 ")
+TIMER_INTDISABLE.addParameter(TIMER_INTDISABLE_BITMASK)
+fileData.addPublicFunctions(TIMER_INTDISABLE)
 
-# Std_ReturnType Timer_RP2040_InterruptEnable ( void );
-
-# Std_ReturnType Timer_RP2040_InterruptDisable ( void );
+#Timer Interrupt Trigger
+# Something to consider adding in the future, but the handling of the interrupts in the function could cause problems. Want to avoid this for now.
+# TIMER_INTENABLE = function()
+# TIMER_INTENABLE.setFuncName(FUNC_PREFIX + "InterruptTrigger")
+# TIMER_INTENABLE.setDescription("Writes directly to the TIMER_INTF register, given an uint8 bitmask. Will report a parameter failure if the bitmask parameter is not within the acceptable range [1,15]. Can be used for testing purposes, or to enforce handling sooner than ALARM")
+# TIMER_INTENABLE.setBrief("Sets interrupt flags for the ALARMS given by the bitmask parameter.")
+# TIMER_INTENABLE.setReturnType("Std_ErrorCode")
+# TIMER_INTENABLE.setReturnDesc(STANDARD_RETURN_DESCR)
+# TIMER_INTENABLE.setPreCondition("Timer module was previously enabled.")
+# TIMER_INTENABLE.setPostCondition("Interrupts were tr.")
+# TIMER_INTENABLE_BITMASK = parameter()
+# TIMER_INTENABLE_BITMASK.setBrief("Bitmask for which interrupts should be enabled. Acceptable values are between (and including) 1d (0b0001) and 15d (0b1111)")
+# TIMER_INTENABLE_BITMASK.setName("int_bitmask")
+# TIMER_INTENABLE_BITMASK.setType(" uint8 ")
+# TIMER_INTENABLE.addParameter(TIMER_INTENABLE_BITMASK)
+# fileData.addPublicFunctions(TIMER_INTENABLE)
 
 # Std_ReturnType Timer_RP2040_ReadTimer ( uint32 * TimerHigh, uint32 * TimerLow );
 

@@ -5,8 +5,9 @@
 * @brief Provides a global timebase for software through the generation of a global microsecond timebase. The timebase relies
 * on a  one microsend reference that is generated in the watchdog, and is derived from the reference clock (REFCLK).
 * A 64-bit timer is managed, and is not able to overflow on it's own - thoughtful use of the module provides
-* completely monotic use in practice. Otherwise, the module initializes, manages, and clears the timer, also manages
-* the alarms which may trigger interrupts.
+* completely monotic use in practice, although setting the time to a specific large value like 0xFFFFFFFF will result
+* in overflow. Otherwise, the module initializes, manages, and clears the timer, also manages the alarms which may
+* trigger interrupts.
 * 
 * @COMPONENT: TIMER_RP2040
 * @VERSION: 00.01.00 
