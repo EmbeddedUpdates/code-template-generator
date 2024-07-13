@@ -196,18 +196,97 @@ fileData.addPublicFunctions(TIMER_INTDISABLE)
 # TIMER_INTENABLE.addParameter(TIMER_INTENABLE_BITMASK)
 # fileData.addPublicFunctions(TIMER_INTENABLE)
 
-# Std_ReturnType Timer_RP2040_ReadTimer ( uint32 * TimerHigh, uint32 * TimerLow );
+TIMER_READTIMER = function()
+TIMER_READTIMER.setFuncName(FUNC_PREFIX + "TimerRead")
+TIMER_READTIMER.setDescription("Reads from TIMER_TIMELR and TIMER_TIMEHR. Is not threadsafe - future improvements can be made by utilizing the RAWL and RAWH registers instead. This read is not threadsafe, and enforces latching on the timer, so interrupts should be stopped specifically during this read.")
+TIMER_READTIMER.setBrief("Reads 64 bit timer and reports the data back in two 32 bit values (high and low)")
+TIMER_READTIMER.setReturnType("Std_ErrorCode")
+TIMER_READTIMER.setReturnDesc(STANDARD_RETURN_DESCR)
+TIMER_READTIMER.setPreCondition("n/a")
+TIMER_READTIMER.setPostCondition("n/a")
+TIMER_READTIMER_TIMERHIGH = parameter()
+TIMER_READTIMER_TIMERHIGH.setBrief("Pointer to where timer bits [63:32] will be stored.")
+TIMER_READTIMER_TIMERHIGH.setName("TimerHigh")
+TIMER_READTIMER_TIMERHIGH.setType(" uint32 * ")
+TIMER_READTIMER.addParameter(TIMER_READTIMER_TIMERHIGH)
+TIMER_READTIMER_TIMERLOW = parameter()
+TIMER_READTIMER_TIMERLOW.setBrief("Pointer to where timer bits [31:0] will be stored.")
+TIMER_READTIMER_TIMERLOW.setName("TimerLow")
+TIMER_READTIMER_TIMERLOW.setType(" uint32 * ")
+TIMER_READTIMER.addParameter(TIMER_READTIMER_TIMERLOW)
+fileData.addPublicFunctions(TIMER_READTIMER)
 
-# Std_ReturnType Timer_RP2040_SetTimer ( uint32 * TimerHigh, uint32 * TimerLow );
+TIMER_WRITETIMER = function()
+TIMER_WRITETIMER.setFuncName(FUNC_PREFIX + "TimerWrite")
+TIMER_WRITETIMER.setDescription("Writes to TIMER_TIMELW and TIMER_TIMEHW. Is not threadsafe - future improvements can be made by utilizing the RAWL and RAWH registers instead. This write is not threadsafe, and enforces latching on the timer, so interrupts should be stopped specifically during this write.")
+TIMER_WRITETIMER.setBrief("Writes 64 bit timer values to the timer utilizing two 32 bit integers.")
+TIMER_WRITETIMER.setReturnType("Std_ErrorCode")
+TIMER_WRITETIMER.setReturnDesc(STANDARD_RETURN_DESCR)
+TIMER_WRITETIMER.setPreCondition("n/a")
+TIMER_WRITETIMER.setPostCondition("n/a")
+TIMER_WRITETIMER_TIMERHIGH = parameter()
+TIMER_WRITETIMER_TIMERHIGH.setBrief("Pointer to where timer bits [63:32] will be loaded from.")
+TIMER_WRITETIMER_TIMERHIGH.setName("TimerHigh")
+TIMER_WRITETIMER_TIMERHIGH.setType(" uint32 * ")
+TIMER_WRITETIMER.addParameter(TIMER_WRITETIMER_TIMERHIGH)
+TIMER_WRITETIMER_TIMERLOW = parameter()
+TIMER_WRITETIMER_TIMERLOW.setBrief("Pointer to where timer bits [31:0] will be loaded from.")
+TIMER_WRITETIMER_TIMERLOW.setName("TimerLow")
+TIMER_WRITETIMER_TIMERLOW.setType(" uint32 * ")
+TIMER_WRITETIMER.addParameter(TIMER_WRITETIMER_TIMERLOW)
+fileData.addPublicFunctions(TIMER_WRITETIMER)
 
-# Std_ReturnType Timer_RP2040_ReadTimerLow ( uint32 * TimerLow );
+# Std_ReturnType Timer_RP2040_ReadTimer_32 ( uint32 * TimerLow );
+TIMER_READTIMER32 = function()
+TIMER_READTIMER32.setFuncName(FUNC_PREFIX + "TimerRead32")
+TIMER_READTIMER32.setDescription("Reads from TimerAWL. Stores the result in the input buffer provided. Does not lock or cause any side-effects.")
+TIMER_READTIMER32.setBrief("Reads the timer from TIMER_TIMERAWL - stores the result in the buffer provided.")
+TIMER_READTIMER32.setReturnType("Std_ErrorCode")
+TIMER_READTIMER32.setReturnDesc(STANDARD_RETURN_DESCR)
+TIMER_READTIMER32.setPreCondition("n/a")
+TIMER_READTIMER32.setPostCondition("n/a")
+TIMER_READTIMER32_TIMERLOW = parameter()
+TIMER_READTIMER32_TIMERLOW.setBrief("Pointer to where timer bits [31:0] will be stored.")
+TIMER_READTIMER32_TIMERLOW.setName("TimerLow")
+TIMER_READTIMER32_TIMERLOW.setType(" uint32 * ")
+TIMER_READTIMER32.addParameter(TIMER_READTIMER32_TIMERLOW)
+fileData.addPublicFunctions(TIMER_READTIMER32)
 
-# Std_ReturnType Timer_RP2040_ReadTimerHigh ( uint32 * TimerHigh );
 
-# Std_ReturnType Timer_RP2040_SetTimerLow ( uint32 * TimerLow );
-
-# Std_ReturnType Timer_RP2040_SetTimerHigh ( uint32 * TimerHigh );
+CHECKALARMN_DESCR = \
+"\
+ * @return \n\
+ *         0: if the alarm is not triggered.\n\
+ *         1: if the alarm is triggered."
 
 # Std_ReturnType Timer_RP2040_CheckAlarm ( uint8 n );
+TIMER_CHECKALARMN = function()
+TIMER_CHECKALARMN.setFuncName(FUNC_PREFIX + "CheckAlarmN")
+TIMER_CHECKALARMN.setDescription("Checks alarm 'n' to see if it has been triggered yet. Returns '1' if")
+TIMER_CHECKALARMN.setBrief("Reads the timer from TIMER_TIMERAWL - stores the result in the buffer provided.")
+TIMER_CHECKALARMN.setReturnType("uint8")
+TIMER_CHECKALARMN.setReturnDesc(CHECKALARMN_DESCR)
+TIMER_CHECKALARMN.setPreCondition("n/a")
+TIMER_CHECKALARMN.setPostCondition("n/a")
+TIMER_CHECKALARMN_INDEX = parameter()
+TIMER_CHECKALARMN_INDEX.setBrief("Index of Alarm to be disarmed, must be within range [0:3].")
+TIMER_CHECKALARMN_INDEX.setName("alarmIndex")
+TIMER_CHECKALARMN_INDEX.setType(" uint8 ")
+TIMER_CHECKALARMN.addParameter(TIMER_CHECKALARMN_INDEX)
+fileData.addPublicFunctions(TIMER_CHECKALARMN)
 
 # Std_ReturnType Timer_RP2040_DisarmAlarm ( uint8 n );
+TIMER_DISARMALARMN = function()
+TIMER_DISARMALARMN.setFuncName(FUNC_PREFIX + "DisarmAlarmN")
+TIMER_DISARMALARMN.setDescription("Disables the alarm indicated by index 'alarmIndex'. rites to the TIMER_ARMED register to disarm the alarm indicated by the 'alarmIndex'. Reports OK if successful, and NOT_OK if failed. Checks input parameter is within range [0:3]")
+TIMER_DISARMALARMN.setBrief("Writes to the TIMER_ARMED register to disarm the alarm indicated by the 'alarmIndex'.")
+TIMER_DISARMALARMN.setReturnType("Std_ErrorCode")
+TIMER_DISARMALARMN.setReturnDesc(STANDARD_RETURN_DESCR)
+TIMER_DISARMALARMN.setPreCondition("n/a")
+TIMER_DISARMALARMN.setPostCondition("n/a")
+TIMER_DISARMALARMN_INDEX = parameter()
+TIMER_DISARMALARMN_INDEX.setBrief("Index of Alarm to be checked, must be within range [0:3].")
+TIMER_DISARMALARMN_INDEX.setName("alarmIndex")
+TIMER_DISARMALARMN_INDEX.setType(" uint8 ")
+TIMER_DISARMALARMN.addParameter(TIMER_DISARMALARMN_INDEX)
+fileData.addPublicFunctions(TIMER_DISARMALARMN)
