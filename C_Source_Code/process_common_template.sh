@@ -27,8 +27,8 @@ else
     exit 0
 fi
 
-OUTPUT_FILE_SOURCE=out/$module.c
-OUTPUT_FILE_HEADER=out/$module.h
+OUTPUT_FILE_SOURCE=out/$module.ctemplate
+OUTPUT_FILE_HEADER=out/$module.htemplate
 
 if [ ! -f $OUTPUT_FILE_SOURCE ]; then
     rm $OUTPUT_FILE_SOURCE
