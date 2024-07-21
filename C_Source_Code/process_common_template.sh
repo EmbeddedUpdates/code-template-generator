@@ -13,18 +13,25 @@
 INPUT_FILE_SOURCE=common_template_source.cog
 INPUT_FILE_HEADER=common_template_header.cog
 
-while getopts m: flag
+while getopts "m:p:" flag
 do
     case "${flag}" in
         m) module=${OPTARG};;
+        p) path_to_module=${OPTARG};;
     esac
 done
 
 if [ -f "$module.py" ]; then
     echo "$module exists"
+    modulepy=$module.py
 else
-    echo "$module does not exist"
-    exit 0
+    if [ -f "$path_to_module/$module.py" ]; then
+      echo "$path_to_module/$module.py exists"
+      modulepy=$path_to_module
+    else
+        echo "$module does not exist"
+        exit 0
+    fi
 fi
 
 OUTPUT_FILE_SOURCE=out/$module.ctemplate
@@ -38,7 +45,7 @@ if [ ! -f $OUTPUT_FILE_HEADER ]; then
     rm $OUTPUT_FILE_HEADER
 fi
 
-echo "cog $INPUT_FILE_SOURCE -o $OUTPUT_FILE_SOURCE"
-cog -d -D MODULE=$module -o $OUTPUT_FILE_SOURCE $INPUT_FILE_SOURCE
-echo "cog $INPUT_FILE_HEADER -o $OUTPUT_FILE_HEADER"
-cog -d -D MODULE=$module -o $OUTPUT_FILE_HEADER $INPUT_FILE_HEADER 
+echo "cog $INPUT_FILE_SOURCE -D ADDPATH=$path_to_module -o $OUTPUT_FILE_SOURCE"
+cog -d -D MODULE=$module -D ADDPATH=$path_to_module -o $OUTPUT_FILE_SOURCE $INPUT_FILE_SOURCE
+echo "cog $INPUT_FILE_HEADER -D ADDPATH=$path_to_module -o $OUTPUT_FILE_HEADER"
+cog -d -D MODULE=$module -D ADDPATH=$path_to_module -o $OUTPUT_FILE_HEADER $INPUT_FILE_HEADER 

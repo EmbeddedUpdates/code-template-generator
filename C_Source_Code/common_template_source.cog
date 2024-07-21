@@ -1,6 +1,8 @@
 /**
  * 
 [[[cog
+import sys
+sys.path.insert(1, ADDPATH)
 mod = __import__(MODULE)
 cog.outl(" * @file \"%s.c\"" % mod.fileData.getModuleName())
 cog.outl(" * @author %s" % mod.fileData.getAuthor())
@@ -26,7 +28,6 @@ cog.outl(" */")
   INCLUDES
 ************************************************************/
 [[[cog
-mod = __import__(MODULE)
 cog.outl("#include \"%s.h\"" % mod.fileData.getModuleName())
 ]]]3
 [[[end]]]
@@ -41,8 +42,6 @@ cog.outl("#include \"%s.h\"" % mod.fileData.getModuleName())
 ************************************************************/
 
 [[[cog
-mod = __import__(MODULE)
-
 for f in mod.fileData.getPrivateFunctions():
   cog.outl("%s" % f.toBigFuncComment())
   cog.outl("static %s" % f.toFuncPrototype())
@@ -61,8 +60,6 @@ for f in mod.fileData.getPrivateFunctions():
 ************************************************************/
 
 [[[cog
-mod = __import__(MODULE)
-
 for f in mod.fileData.publicFunctions:
   cog.outl("%s" % f.toFuncComment())
   cog.outl("%s" % f.toFuncPrototype())

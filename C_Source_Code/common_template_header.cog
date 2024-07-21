@@ -1,6 +1,8 @@
 /**
  * 
 [[[cog
+import sys
+sys.path.insert(1, ADDPATH)
 mod = __import__(MODULE)
 cog.outl(" * @file \"%s.h\"" % mod.fileData.moduleName)
 cog.outl(" * @author %s" % mod.fileData.author)

@@ -1,0 +1,59 @@
+/**
+ * 
+* @file "WATCHDOG_RP2040.h"
+* @author Madrick3
+* @brief Provides a global timebase for software through the generation of a global microsecond timebase. The timebase relies
+* on a  one microsend reference that is generated in the watchdog, and is derived from the reference clock (REFCLK).
+* A 64-bit timer is managed, and is not able to overflow on it's own - thoughtful use of the module provides
+* completely monotic use in practice, although setting the time to a specific large value like 0xFFFFFFFF will result
+* in overflow. Otherwise, the module initializes, manages, and clears the timer, also manages the alarms which may
+* trigger interrupts.
+* 
+* @COMPONENT: WATCHDOG_RP2040
+* @VERSION: 00.01.00 
+*/
+/************************************************************
+  Version History
+  -----------------------------------------------------------
+  Revision |  Author   |  Change ID  |  Description
+  00.00.00 |  AUTHOR   |  DRAFT      |  Initial Creation
+************************************************************/
+
+/************************************************************
+  DEFINES
+************************************************************/
+
+/************************************************************
+  INCLUDES
+************************************************************/
+#include "Platform_Types.h"
+#include "WATCHDOG_RP2040_SFR.h"
+
+/************************************************************
+  ENUMS AND TYPEDEFS
+************************************************************/
+
+/************************************************************
+  EXTERN FUNCTIONS
+************************************************************/
+
+/************************************************************
+  GLOBAL FUNCTIONS
+************************************************************/
+
+/**
+ * Initializes the timer module for a basic runtime implemetations: Arms ALARM0 as a 1ms timer, clears TIME, and begins
+ * the timer. Can fail if the RP2040_Watchdog is not already initialized. (See RP2040 datasheet section 4.7.2 'Tick
+ * Generation'). Interrupts are not necessarily enabled at this stage.
+ *
+ * @return 
+ *         0: 'E_OK' if successful 
+ *         1: 'E_NOT_OK' if the operation is not successful
+ *
+ * @pre  Tick generation is already started in the watchdog module. 
+ * @post  ALARM0 is armed. 
+ * @invariant n/a
+ *
+ */
+extern Std_ErrorCode WATCHDOG_RP2040_Init ( void );
+
